@@ -1,0 +1,125 @@
+INDEX
+	°Fondo
+		-Tipo UDG/CUCEI (si queda tiempo lo ponemos mas "bonito").
+
+	°Login
+		-Usuario/codigo y contraseña/nip (de ser logeado con codigo y nip se verifica la autenticidad de la cuenta).
+
+	°Registrar
+		-Ver formulario de altas (no permitir duplicados, verificar autenticidad de la cuenta de ser registrado con codigo y nip).
+
+ENTRANDO
+	°Modifiar datos
+		-ver formulario de cambio de datos.
+
+	°Mandar notificaciones
+		-Locales o globales (ver formulario de notificaciones).
+
+	°Ver notificaciones
+		-Locales o globales (ver formulario de notificaciones).
+
+	°Seleccionar lugar de estacionamiento
+		-Mostrar el mapa (ver seccion de MAPA) y permitir marcar un lugar (solo si se tiene permiso, caso contrario solo podra ver lo señalado en la seccion de MAPA) si ya se esta estacionado este lugar estara inavilitado.
+		-Mostrar opcion de quiero estacionarme esta opcion se desmarcara cuando el usuario se desloge o este ya tenga permiso de estacionarse.
+
+	°Liberar lugar
+		-Cuando el usuario ya se vaya debera desmarcar su lugar, esta opcion solo estara disponible si el usuario esta estacionado. 
+
+	°Ver estacionamiento
+		-Podra ver quien tiene cada lugar ocupado (podra ver solo placas, y nombre del propietario).
+
+	**** SOLO ADMINISTRADORES ****
+	°Dar alta cuenta
+		-ALUMNO (ver formulario de altas).
+		-MAESTRO (ver formulario de altas).
+		-INVITADO (ver formulario de altas).
+		-ADMINISTRADOR
+			*Usuario.
+			*Contraseña.
+			*Nombre(s).
+			*Apellido(s).
+			*Correo.
+			*Telefono.
+
+	°Dar baja cuenta
+		-Cualquier cuenta.
+
+	°Dar baja lugar
+		-Manda notificaion al usuario.
+
+	°Dar permiso/quitar de estacionarse
+		-Manda notificaion al usuario. 
+MAPA
+	°GoogleMaps
+		-En el mapa se mostrara con una marca los lugares disponibles de acuerdo al tipo de cuenta (ver tipos de cuenta)
+		-Seleccionar el lugar deseado (solo se podra si se tiene permiso).
+		-Mostrar cantidad de usuario a la espera de un lugar (los que estan esperando a entrar, estos se aumentan cuando un usuario entra a la opcion de seleccionar lugar de estacionamiento estacionarme y dar la opcion de quiero estacionarme, si ya no hay lugares mostarar mensaje al usuario).
+		-Mostar cantidad de lugares disponibles (no solo por las marcas sino tambien un numero).
+		-Llenar en la base de datos la ubicacion de cada espacio de estacionamiento(si gogle maps no permite ver el lugar usar las coordenadas que nos da, caso contrario ir y manualmente ingresar cada una de las coordenadas).
+
+TIPOS DE CUENTA
+	°ALUMNO
+		-Darse de alta (ver formulario de altas).
+		-Modificar sus datos (no codigo ni nip, ver formulario de cambio de datos).
+		-Logearse (como en siiau con codigo y nip, mandar error si no se puedo logear).
+		-Marca su lugar de entrada y salida(verificar que aun existan lugares antes de mostrar el mapa).
+		-Recibir notificaciones locales y globales(ver formulario de notifiaciones).
+		-Para mandar una notificacion global debe ser mandada al administrador apra su aprobacion.
+
+	°PROFESOR
+		-Igual que ALUMNO solo cambia los lugares que puede estacionar.
+
+	°INVITADO
+		-Igual que ALUMNO.
+		-Logearse con su usuario y contraseña.
+
+	°ADMINISTRADOR
+		-Dar de baja y alta cualquier tipo de cuenta (incluye administrador).
+		-Modificar datos de cualquier usuario (no codigo/usario, no nip, si contraseña, ver formulario de cambio de datos, se le mandara una notificacion al usuario con los datos modificados antes y despues del cambio).
+		-Marcar y desmarcar cualquier lugar de cualquier estacionamiento (se le amndara una notificacion al usuario en cada caso).
+		-Enviar y recibir notificaciones locales y globales (responder cuando una solicitud sea antendida).
+		-Otorgrar permisos de estacionarse, una vez que el usuario entre al estacionamiento.
+
+FORMULARIO DE ALTAS
+	°Elegir tipo de cunta
+		-ALUMNO (verificar codigo y nip, arrojar error si es necesario)
+			*Codigo.
+			*Nip.
+			*Nombre(s).
+			*Apellido(s).
+			*Telefono.
+			*Correo.
+			*Placas del carro.
+
+		-MAESTRO (verificar codigo y nip, arrojar error si es necesario)
+			*Igual que alumno.
+
+		-INVITADO (verificar usuario y contraseña, no permitir tomar usuario como codigo, arrojar error si es necesario)
+			*Igual que alumno y mastro solo cambiar codigo por usuario y nip por contraseña.
+
+FORMULARIO NOTIFICACIONES
+	°Local
+		-Placas del usuario a mandar notificacion.
+		-Mensaje.
+		-Se manda un duplicado al administrador.
+	°Globla
+		-Mensaje
+		-Se manda un duplica al administrador y si se aprueba se manda a todos los usuario que estan estacionados.
+
+FORMULARIO MODIFICACIONES
+	-ALUMNO
+		*Telefono.
+		*Correo.
+		*Placas del carro.
+	-MAESTRO
+		*Igual que alumno.
+	-INVITADO
+		*Igual que alumno y maestro, pero este tambien podra cambiar contraseña.
+
+Fecha tenativa para terminar domingo 14 de mayo de 2017, en case de aun no acabar maximo hasta el martes 16 de mayo de 2017
+
+initado 	  0
+alumno  	  1
+maestro 	  2
+guardia 	  3
+administrador 4
